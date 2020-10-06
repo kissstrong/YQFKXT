@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+    <title>Dashboard &mdash; Stisla</title>
+    <link th:rel="stylesheet" th:href="@{dist/modules/bootstrap/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{dist/modules/ionicons/css/ionicons.min.css}">
+    <link th:rel="stylesheet" th:href="@{dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css}">
+    <link th:rel="stylesheet" th:href="@{dist/modules/summernote/summernote-lite.css}">
+    <link th:rel="stylesheet" th:href="@{dist/modules/flag-icon-css/css/flag-icon.min.css}">
+    <link th:rel="stylesheet" th:href="@{dist/css/demo.css}">
+    <link th:rel="stylesheet" th:href="@{dist/css/style.css}">
+</head>
+<body>
+<nav th:fragment="nav" class="navbar navbar-expand-lg main-navbar">
+    <form class="form-inline mr-auto">
+        <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+        </ul>
+    </form>
+    <ul class="navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                <i class="ion ion-android-person d-lg-none"></i>
+                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                <a th:href="@{/logout}" class="dropdown-item has-icon">
+                    <i class="ion ion-log-out"></i>Logout
+                </a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<div class="main-sidebar" th:fragment="sidebar(page)">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="index">疫情数据信息管理</a>
+        </div>
+        <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+                <img alt="image" src="../dist/img/avatar/avatar-1.jpeg">
+            </div>
+            <div class="sidebar-user-details">
+                <div class="user-name">Ujang Maman</div>
+                <div class="user-role">
+                    普通用户
+                </div>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li th:class="${page}=='1'?'active':''">
+                <a href="index" th:href="@{/}"><i class="ion ion-heart"></i><span>全国疫情数据查询</span></a>
+            </li>
+            <li th:class="${page}=='2'?'active':''">
+                <a href="table" th:href="@{touploaddata}"><i class="ion ion-heart"></i><span>疫情数据上报</span></a>
+            </li>
+        </ul>
+    </aside>
+</div>
+<div th:fragment="script">
+    <script th:src="@{dist/modules/jquery.min.js}"></script>
+    <script th:src="@{dist/modules/popper.js}"></script>
+    <script th:src="@{dist/modules/tooltip.js}"></script>
+    <script th:src="@{dist/modules/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{dist/modules/nicescroll/jquery.nicescroll.min.js}"></script>
+    <script th:src="@{dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js}"></script>
+    <script th:src="@{dist/js/sa-functions.js}"></script>
+    <script th:src="@{dist/modules/chart.min.js}"></script>
+    <script th:src="@{dist/modules/summernote/summernote-lite.js}"></script>
+    <script th:src="@{dist/js/scripts.js}"></script>
+    <script th:src="@{dist/js/custom.js}"></script>
+    <script th:src="@{dist/js/demo.js}"></script>
+</div>
+</body>
+</html>
