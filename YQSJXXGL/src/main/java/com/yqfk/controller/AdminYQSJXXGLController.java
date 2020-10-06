@@ -77,12 +77,10 @@ public class AdminYQSJXXGLController {
     }
     @RequestMapping("/queryByTag")
     public String queryByTag(Tags tags, Model model){
-        System.out.println(tags);
          List<DataForPerson> dataForPeople = yqsjxxglService.queryByTags(tags);
         model.addAttribute("data",dataForPeople);
         return "admin/alldata::data";
     }
-
     @RequestMapping("/deleteById")
     public String deleteById(int id, Model model){
         yqsjxxglService.deleteById(id);
