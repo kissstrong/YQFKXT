@@ -4,6 +4,8 @@ import com.yqfk.poji.Address;
 import com.yqfk.poji.City;
 import com.yqfk.poji.DataForPerson;
 import com.yqfk.poji.Province;
+import com.yqfk.pojo.News;
+import com.yqfk.service.NewsService;
 import com.yqfk.service.YQSJXXGLService;
 import com.yqfk.vo.Tags;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,8 @@ import java.util.Map;
 public class AdminYQSJXXGLController {
     @Resource
     private YQSJXXGLService yqsjxxglService;
-
+    @Resource
+    private NewsService newsService;
     @RequestMapping("/admin")
     public String index(Model model){
         Map<String, Province> jsonMsg = yqsjxxglService.getJsonMsg();
@@ -31,6 +34,8 @@ public class AdminYQSJXXGLController {
         City city = province.getCities().get("南通");
         model.addAttribute("city",city);
         model.addAttribute("province",province);
+        model.addAttribute("newsList",newsService.getNewsList());
+        model.addAttribute("desc",newsService.getDesc());
         return "admin/index";
     }
 
@@ -86,5 +91,11 @@ public class AdminYQSJXXGLController {
         yqsjxxglService.deleteById(id);
         model.addAttribute("data",yqsjxxglService.queryAll());
         return "admin/alldata::data";
+    }
+    @RequestMapping("/adminqueryNewsByDate")
+    public String queryNewsByDate(String date,Model model){
+        List<News.NewslistDTO.NewsDTO> newsList = newsService.getNewsListByDate(date);
+        model.addAttribute("newsList",newsList);
+        return "admin/index::newsList";
     }
 }

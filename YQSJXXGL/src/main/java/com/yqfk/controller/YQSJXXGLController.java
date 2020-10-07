@@ -4,13 +4,17 @@ import com.yqfk.poji.Address;
 import com.yqfk.poji.City;
 import com.yqfk.poji.DataForPerson;
 import com.yqfk.poji.Province;
+import com.yqfk.pojo.News;
+import com.yqfk.service.NewsService;
 import com.yqfk.service.YQSJXXGLService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +25,8 @@ import java.util.Map;
 public class YQSJXXGLController {
     @Resource
     private YQSJXXGLService yqsjxxglService;
-
+    @Resource
+    private NewsService newsService;
     @RequestMapping("/")
     public String index(Model model){
         Map<String, Province> jsonMsg = yqsjxxglService.getJsonMsg();
@@ -29,9 +34,10 @@ public class YQSJXXGLController {
         City city = province.getCities().get("南通");
         model.addAttribute("city",city);
         model.addAttribute("province",province);
+        model.addAttribute("newsList",newsService.getNewsList());
+        model.addAttribute("desc",newsService.getDesc());
         return "index";
     }
-
     @RequestMapping("/getJsonBySheng")
     public String getJsonBySheng(String sheng, Model model){
         Map<String, Province> jsonMsg = yqsjxxglService.getJsonMsg();
@@ -67,5 +73,11 @@ public class YQSJXXGLController {
         dataForPerson.setDate(new Date());
         yqsjxxglService.uploadPersonData(dataForPerson);
         return "redirect:/";
+    }
+    @RequestMapping("/queryNewsByDate")
+    public String queryNewsByDate(String date,Model model){
+        List<News.NewslistDTO.NewsDTO> newsList = newsService.getNewsListByDate(date);
+        model.addAttribute("newsList",newsList);
+        return "index::newsList";
     }
 }
