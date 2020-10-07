@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="renderer" content="webkit">
+    <title>仿今日头条列表</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+
+
+
+</head>
+
+<style type="text/css">
+    p{
+        margin: 0;
+        padding: 0;
+    }
+    .data-item{
+        border: 0;
+        border-bottom: 1px solid #f5f6f7;
+        /*border-bottom: 1px solid #000; */
+        margin-top: 5px;
+    }
+    .data-group-text .data-group-text-title a{
+        font-size: 18px;
+        font-weight: bold;
+        color: #222;
+        margin-top: 0;
+    }
+    .data-group-img img{
+        display: inline-block;
+        width: 126px;
+        height: 82px;
+        margin-top: 5px;
+    }
+    .data-group-img + .data-group-text{  /* 加号+用于选择兄弟元素 */
+        margin-left: 140px;
+
+    }
+    .data-group-text-footer-right a{
+        color: #999;
+        margin-left: 5px;
+    }
+    .data-group-text-footer-left span{
+        color: #999;
+        font-size: 10px;
+    }
+    .content{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+    .title{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2   ;
+        -webkit-box-orient: vertical;
+    }
+    #date{
+        width: 100px;
+    }
+</style>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <!--S 左边内容-->
+        <div class="col-md-3">
+        </div>
+        <!--E 左边内容-->
+        <!--S 中间列表内容-->
+        <div class="col-md-6">
+
+            <span>输入新闻日期:</span><br>
+            <form th:action="@{/news/getNewsListByDate}" >
+                <input id="date"  type="text" th:placeholder="${#dates.format(newsList.get(0).getPubDate(),'yyyy-MM-dd')}">
+                <input type="submit" value="查询">
+            </form>
+
+            <ul class="list-group" th:each="list:${newsList}">
+                <li class="list-group-item data-item">
+                    <div class="data-group">
+
+                        <div class="data-group-text">
+                            <div class="data-group-text-title">
+                                <a class="title" th:href="${list.getSourceUrl()}" th:text="${list.getTitle()}"></a>
+                            </div>
+                            <div class="data-group-text">
+                                <span class="content" th:text="${list.getSummary()}"></span>
+                            </div>
+
+                            <div class="data-group-text-footer">
+                                <div class="data-group-text-footer-left pull-left">
+                                    <span th:text="${list.getInfoSource()}"></span>
+                                    <span th:text="${#dates.format(list.getPubDate(),'yyyy-MM-dd')}"></span>
+                                    <span th:text="${list.getPubDateStr()}"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--E 中间列表内容-->
+        <!--S 右边内容-->
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
