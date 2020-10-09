@@ -3,7 +3,6 @@ com\yqfk\service\NewsService.class
 com\yqfk\pojo\News$NewslistDTO$DescDTO.class
 com\yqfk\pojo\News$NewslistDTO$NewsDTO.class
 com\yqfk\controller\NewsController.class
-com\yqfk\GGZRMain8001.class
 com\yqfk\pojo\News$NewslistDTO$DescDTO$ForeignStatisticsDTO.class
 com\yqfk\service\NewsServiceImpl.class
 com\yqfk\pojo\News$NewslistDTO$DescDTO$GlobalStatisticsDTO.class
