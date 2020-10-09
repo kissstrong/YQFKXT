@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HOME</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link th:href="@{/css/templatemo_style.css}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ddsmoothmenu.css}" />
+
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ddsmoothmenu.js}">
+
+    </script>
+
+    <script type="text/javascript">
+
+        ddsmoothmenu.init({
+            mainmenuid: "templatemo_menu", //menu DIV id
+            orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+            classname: 'ddsmoothmenu', //class added to menu's outer DIV
+            //customtheme: ["#1c5a80", "#18374a"],
+            contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+        })
+
+    </script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    <script language="javascript" type="text/javascript" th:src="@{/scripts/mootools-1.2.1-core.js}"></script>
+    <script language="javascript" type="text/javascript" th:src="@{/scripts/mootools-1.2-more.js}"></script>
+    <script language="javascript" type="text/javascript" th:src="@{/scripts/slideitmoo-1.1.js}"></script>
+    <script language="javascript" type="text/javascript">
+        window.addEvents({
+            'domready': function(){
+                /* thumbnails example , div containers */
+                new SlideItMoo({
+                    overallContainer: 'SlideItMoo_outer',
+                    elementScrolled: 'SlideItMoo_inner',
+                    thumbsContainer: 'SlideItMoo_items',
+                    itemsVisible: 5,
+                    elemsSlide: 2,
+                    duration: 200,
+                    itemsSelector: '.SlideItMoo_element',
+                    itemWidth: 171,
+                    showControls:1});
+            },
+
+        });
+
+        function clearText(field)
+        {
+            if (field.defaultValue == field.value) field.value = '';
+            else if (field.value == '') field.value = field.defaultValue;
+        }
+    </script>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+</head>
+
+<body id="home">
+
+<div id="templatemo_wrapper">
+    <div th:replace="~{common/common::topbar}"></div>
+    <div th:replace="~{common/common::menubar}"></div>
+
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main">
+        <div id="product_slider">
+            <div id="SlideItMoo_outer">
+                <div id="SlideItMoo_inner">
+                    <div id="SlideItMoo_items">
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=1)}" target="_parent">
+                                <img th:src="@{/images/gallery/01.jpg}" alt="product 1" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=2)}" target="_parent">
+                                <img th:src="@{/images/gallery/02.jpg}" alt="product 2" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=3)}" target="_parent">
+                                <img th:src="@{/images/gallery/03.jpg}" alt="product 3" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=4)}" target="_parent">
+                                <img th:src="@{/images/gallery/04.jpg}" alt="product 4" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=5)}" target="_parent">
+                                <img th:src="@{/images/gallery/05.jpg}" alt="product 5" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=9)}" target="_parent">
+                                <img th:src="@{/images/gallery/06.jpg}" alt="product 6" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                            <a th:href="@{/productDetail(pId=7)}" target="_parent">
+                                <img th:src="@{/images/gallery/07.jpg}" alt="product 7" style="height: 150px;width: 150px"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cleaner"></div>
+        </div>
+
+            <div class="table-responsive">
+                <h3 style="margin-left: 780px"><a th:href="@{/toAddAddress}" type="button" style="color: chartreuse">新增地址</a></h3>
+            <table border="1" align="center" bgcolor="white" style="color:black;">
+                <thead>
+                <tr>
+                    <th>地址编号</th>
+                    <th>收货人姓名</th>
+                    <th>地址</th>
+                    <th>联系电话</th>
+                    <th>详细地址</th>
+                    <th>默认地址</th>
+                    <th colspan="3">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="address:${addresses}"  align="center" valign="middle">
+                        <td th:text="${address.getaId()}" ></td>
+                        <td th:text="${address.getaName()}" ></td>
+                        <td th:text="${address.getAddress()}" ></td>
+                        <td th:text="${address.getTel()}" ></td>
+                        <td th:text="${address.getDetail()}"></td>
+                        <td th:text="${address.getDef()==1?'true':'false'}"></td>
+                        <td><a class="btn btn-sm btn-primary" th:href="@{toUpdateAddress(aId=${address.aId})}" style="color: #21bdd0">修改</a></td>
+                        <td><a class="btn btn-sm btn-danger" th:href="@{/deleteAddress(aId=${address.aId})}" style="color: red">删除</a></td>
+                        <td><a class="btn btn-sm btn-info" th:href="@{/setDefault(aId=${address.aId})}" style="color: #cccccc">设为默认</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+        <div class="cleaner"></div>
+    </div> <!-- END of main -->
+
+    <div th:replace="~{common/common::footerbar}"></div>
+
+</div>
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

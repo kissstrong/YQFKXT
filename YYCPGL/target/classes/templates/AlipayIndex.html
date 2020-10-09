@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>支付</title>
+</head>
+<body>
+<H3 style="padding-left: 592px;color: #21bdd0">支付测试</H3>
+<hr>
+<div class="form-container">
+
+    <form th:action="@{/alipay1}" >
+        <div class="form-group">
+            <label for="exampleInputEmail1" style="padding-left: 606px">*订单名称*</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="subject" placeholder="请输入订单名称" style="text-align: center">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1" style="padding-left: 608px">*付款金额*</label>
+            <input type="text" class="form-control" id="exampleInputPassword1"  name="total_amount"  readonly th:value="${total}" style="text-align: center">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2" style="padding-left: 622px">*备注*</label>
+            <input type="text" class="form-control" id="exampleInputPassword2" name="body" style="text-align: center">
+        </div>
+        <input type="submit" class="btn btn-info" style="margin-left: 595px" value="支付宝支付"/>
+    </form>
+
+   <!-- <form th:action="@{/alipay1}" >
+        &lt;!&ndash;   *商户订单 :&ndash;&gt;
+        *订单名称 :
+        <input type="text" name="subject" placeholder="请输入订单名称"><br>
+        *付款金额 :
+        <input type="text" name="total_amount"  th:value="${total}"><br>
+        *备注 :
+        <input type="text" name="body" ><br>
+        <input type="submit" value="支付宝支付" >
+    </form>-->
+</div>
+</body>
+</html>
