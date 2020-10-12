@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface OrderService {
     List<Order> queryAll();
+    Order queryOrderByOid(long oId);
     void addOrder(Order order);
     void deleteOrder(long oId);
+    void updateOrder(Order order);
 }

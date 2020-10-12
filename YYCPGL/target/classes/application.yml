@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.27.216.13:3306/yqfk?userSSl=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+mybatis:
+  type-aliases-package: com.yqfk.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+pagehelper:
+  reasonable: true
+  auto-dialect: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect: mysql
+server:
+  port: 8006
+
