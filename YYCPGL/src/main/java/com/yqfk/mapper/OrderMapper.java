@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
     List<Order> queryAll();
+    Order queryOrderByOid(long oId);
     void addOrder(Order order);
     void deleteOrder(long oId);
+    void updateOrder(Order order);
 }

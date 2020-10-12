@@ -55,7 +55,6 @@ public class UserController {
     @RequestMapping("/query2")
     public String queryAllToPage(int page,Model model,String keyword){
         PageInfo pageInfo = productService.queryAllToPage(page,2,keyword);
-        System.out.println(keyword);
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("keyword",keyword);
         return "search";
@@ -129,8 +128,6 @@ public class UserController {
         List<Product> products = (List<Product>) session.getAttribute("products");
         List<Integer> pIds = (List<Integer>) session.getAttribute("pIds");
         String str="|";
-        System.out.println(products);
-        System.out.println(pIds);
         for (Product product : products) {
             for (Integer pId : pIds) {
                 if(product.getpId()==pId){
@@ -139,7 +136,6 @@ public class UserController {
                 }
             }
         }
-        System.out.println(str);
         model.addAttribute("str",str);
         float total = (float) session.getAttribute("total");
         model.addAttribute("total",total);
@@ -181,6 +177,15 @@ public class UserController {
     public String deleteOrder(long oId){
         orderService.deleteOrder(oId);
         return "redirect:/toOrder";
+    }
+
+    @ResponseBody
+    @RequestMapping("/updateOrder")
+    public String updateOrder(long oId){
+        Order order = orderService.queryOrderByOid(oId);
+        order.setStatus("已收货！");
+        orderService.updateOrder(order);
+        return "success";
     }
 
 

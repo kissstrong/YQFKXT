@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Bucket</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link th:href="@{/css/templatemo_style.css}" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/ddsmoothmenu.css}" />
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/ddsmoothmenu.js}">
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+	mainmenuid: "templatemo_menu", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+</script>
+
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+	if (field.defaultValue == field.value) field.value = '';
+	else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+
+</head>
+
+<body id="subpage">
+
+<div id="templatemo_wrapper">
+
+    <div th:replace="~{common/common::topbar}"></div>
+    <div th:replace="~{common/common::menubar}"></div>
+    
+    <div class="cleaner h20"></div>
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main">
+
+        <div th:replace="~{common/common::sidebar}"></div>
+       
+        <div id="content">
+		
+        	<table width="700px" cellspacing="0" cellpadding="5">
+                   	  <tr bgcolor="#CCCCCC">
+                          <th width="220" align="left">选中商品</th>
+                          <th width="220" align="left">图片 </th>
+                        	<th width="180" align="left">信息 </th>
+                       	  	<th width="100" align="center">数量 </th>
+                        	<th width="60" align="right">单价 </th>
+                        	<th width="60" align="right">总价 </th>
+                        	<th width="90"> </th>
+                            
+                      </tr>
+                    	<tr th:each="product:${products}">
+                            <td>
+                                <input type="checkbox" class="a" th:value="${product.pId}"/>
+                            </td>
+                            <input type="hidden" th:value="${product.pId}" id="pId"/>
+                            <td><a th:href="@{/productDetail(pId=${product.pId})}"><img th:src="@{${product.pictureId}+'collect.jpg'}" style="height: 200px;width: 200px"/></a></td>
+                        	<td>[[${product.msg}]]</td>
+                            <td align="center"><input type="text" value="0" style="width: 20px; text-align: right" th:id="${product.pId}" th:name="${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}" onchange="AllTotal(this)"/> </td>
+                            <td align="right">￥ [[${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}]]</td>
+                            <td align="right"><span>￥
+                                <span th:id="all+${product.pId}" class="all">0</span></span></td>
+                            <td align="center"> <a th:href="@{/removeFromBucket(pId=${product.pId})}"><img th:src="@{/images/remove_x.gif}"/><br />Remove</a> </td>
+						</tr>
+
+                        <tr>
+                        	<td colspan="3" align="right"  height="40px">&nbsp;&nbsp;</td>
+                            <td align="right" style="background:#ccc; font-weight:bold"> Total </td>
+                            <td align="right" style="background:#ccc; font-weight:bold" ><span>￥ <span id="all">0</span></span> </td>
+
+                            <td style="background:#ccc; font-weight:bold"> </td>
+						</tr>
+					</table>
+
+                    <div style="float:right; width: 215px; margin-top: 20px;">
+
+                        <div class="checkout"><a type="button" onclick="check()" class="more">Proceed to Checkout</a></div>
+                        <div class="cleaner h20"></div>
+                        <div class="continueshopping"><a th:href="@{/products}" class="more">Continue Shopping</a></div>
+                    	
+                    </div>
+            
+		</div>
+        <div class="cleaner"></div>
+    </div> <!-- END of main -->
+
+    <div th:replace="~{common/common::footerbar}"></div>
+   
+</div>
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+
+<script th:src="@{/js/jquery-3.1.0.js}" type="text/javascript"></script>
+<script type="text/javascript">
+
+    function AllTotal(obj) {
+            let price = $(obj).attr("name");
+
+            let num = $(obj).val();
+            let id = $(obj).attr("id");
+            if (num==1){
+                alert("买得越多优惠越大哟！")
+                $('#all'+id).html(num*price);
+            }else if(num==2){
+                alert("2件打9折!")
+                $('#all'+id).html(num*price*0.9);
+            }else if(num==3){
+                alert("3件打8折!")
+                $('#all'+id).html(num*price*0.8);
+            }else if(num==4){
+                alert("4件打7折!")
+                $('#all'+id).html(num*price*0.7);
+            }else if(num==5){
+                alert("5件打6折!")
+                $('#all'+id).html(num*price*0.6);
+            }else if(num>5){
+                alert("5件以上打5折!")
+                $('#all'+id).html(num*price*0.5);
+            }else {
+                alert("请确定您输入了正确的数字！")
+            }
+
+            var money=0;
+            $(".all").each(function (index,item) {
+            let jQuery = $(item).html();
+            let number = parseInt(jQuery);
+            money+=number;
+        })
+
+        $("#all").html(money)
+    }
+
+    function check() {
+
+        var id=new Array();
+        $(".a:checked").each(function (index,item) {
+            let val = $(item).val();
+            id.push(val);
+        })
+        let total=$(all).html();
+        if(total>0) {
+            $.ajax({
+                url:"toCheck",
+                success:function (data) {
+                    if(data=='success'){
+                        window.location="toCheckOut?total="+total+"&ids="+id;
+                    }else if (data=='error1'){
+                        alert("请先添加至少一个地址！");
+                        window.location="address2";
+                    }else {
+                        alert("请选择一个默认地址！");
+                        window.location="address2";
+                    }
+                }
+            })
+        }else {
+            $(this).attr("disabled","true");
+        }
+    }
+
+</script>
+
+</body>
+</html>

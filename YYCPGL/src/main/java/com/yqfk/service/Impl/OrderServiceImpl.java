@@ -20,6 +20,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order queryOrderByOid(long oId) {
+        return orderMapper.queryOrderByOid(oId);
+    }
+
+    @Override
     public void addOrder(Order order) {
         orderMapper.addOrder(order);
     }
@@ -27,6 +32,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteOrder(long oId) {
         orderMapper.deleteOrder(oId);
+    }
+
+    @Override
+    public void updateOrder(Order order) {
+        orderMapper.updateOrder(order);
     }
 
 

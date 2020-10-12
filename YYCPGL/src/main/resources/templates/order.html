@@ -142,14 +142,20 @@ function clearText(field)
 <script type="text/javascript">
     function a(oId) {
         window.location="deleteOrder?oId="+oId;
-        alert("退款成功！订单已删除！");
+        alert("退款成功！订单已删除");
     }
 
     function confirm(obj) {
         let oId = $(obj).attr("id");
-        alert("确认收货成功！");
-        $('#a'+oId).css("color","green");
-        
+        alert("确认收货成功");
+        $.ajax({
+            url:"updateOrder?oId="+oId,
+            success:function (data) {
+                if (data=='success'){
+                    window.location="toOrder";
+                }
+            }
+        })
     }
 </script>
 
