@@ -1,22 +1,19 @@
 package com.yqfk.pojo;
-
-
 import lombok.Data;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+
 
 @Entity
-@Table(name = "admin")
 @Data
-public class Admin {
+public class Admin implements Serializable {
 
     @Id
-    private String userid;
-
-    private String loginname;
-
+    @GeneratedValue
+    private int userid;
+    private String username;
     private String password;
-
+    private String phone;
 }

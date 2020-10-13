@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="GGZR" />
         <module name="XTSZ" />
         <module name="YQSJXXGL" />
-        <module name="YYCPGL" />
+        <module name="GGZR" />
         <module name="GLYDL" />
+        <module name="YYCPGL" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

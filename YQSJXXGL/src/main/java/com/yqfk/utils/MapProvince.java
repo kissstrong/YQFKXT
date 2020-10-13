@@ -1,7 +1,7 @@
 package com.yqfk.utils;
 
-import com.yqfk.poji.City;
-import com.yqfk.poji.Province;
+import com.yqfk.pojo.City;
+import com.yqfk.pojo.Province;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

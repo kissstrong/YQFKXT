@@ -1,8 +1,8 @@
 package com.yqfk.service;
 
 
-import com.yqfk.poji.DataForPerson;
-import com.yqfk.poji.Province;
+import com.yqfk.pojo.DataForPerson;
+import com.yqfk.pojo.Province;
 import com.yqfk.vo.Tags;
 
 import java.util.List;

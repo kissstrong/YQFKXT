@@ -12,6 +12,10 @@
     <artifactId>YQSJXXGL</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!--广告模块-->
         <dependency>
             <groupId>org.example</groupId>

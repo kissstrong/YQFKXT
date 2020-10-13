@@ -24,7 +24,7 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
                 <i class="ion ion-android-person d-lg-none"></i>
-                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                <div class="d-sm-none d-lg-inline-block" >Hi, [[${session.admin.username}]]</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a th:href="@{/logout}" class="dropdown-item has-icon">
@@ -37,29 +37,31 @@
 <div class="main-sidebar" th:fragment="sidebar(page)">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index">疫情数据信息管理</a>
+            <a href="index">管理员</a>
         </div>
         <div class="sidebar-user">
             <div class="sidebar-user-picture">
                 <img alt="image" src="../dist/img/avatar/avatar-1.jpeg">
             </div>
             <div class="sidebar-user-details">
-                <div class="user-name">Ujang Maman</div>
+                <div class="user-name">[[${session.admin.username}]]</div>
                 <div class="user-role">
                     管理员
                 </div>
             </div>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Dashboard</li>
             <li th:class="${page}=='1'?'active':''">
-                <a href="index" th:href="@{/admin}"><i class="ion ion-heart"></i><span>全国疫情数据查询</span></a>
+                <a href="index" th:href="@{/admin}"><i class="ion ion-heart"></i><span>查询所有用户</span></a>
             </li>
             <li th:class="${page}=='2'?'active':''">
                 <a href="table" th:href="@{admintouploaddata}"><i class="ion ion-heart"></i><span>疫情数据上报</span></a>
             </li>
             <li th:class="${page}=='3'?'active':''">
                 <a href="chartjs" th:href="@{admintogetdata}"><i class="ion ion-heart"></i><span>查看上报记录</span></a>
+            </li>
+            <li th:class="${page}=='4'?'active':''">
+                <a href="chartjs" th:href="@{toMainYYCPGL}"><i class="ion ion-heart"></i><span>医药厂品管理系统</span></a>
             </li>
         </ul>
     </aside>

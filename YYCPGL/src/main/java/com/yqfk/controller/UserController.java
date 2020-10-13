@@ -30,6 +30,11 @@ public class UserController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 分页查询所有产品，每页显示六个产品
+     * @param model
+     * @return
+     */
     @RequestMapping("/products")
     public String products(Model model){
         PageInfo pageInfo = productService.queryAll(1, 6);
@@ -37,6 +42,11 @@ public class UserController {
         return "products";
     }
 
+    /**
+     * 分页查询所有产品，每页显示六个产品
+     * @param model
+     * @return
+     */
     @RequestMapping("/query1")
     public String queryForPage(int page,Model model){
         PageInfo pageInfo = productService.queryAll(page, 6);
@@ -44,6 +54,11 @@ public class UserController {
         return "products";
     }
 
+    /**
+     * 分页模糊查询所有产品，每页显示两个产品
+     * @param model
+     * @return
+     */
     @RequestMapping("/searchProduct")
     public String searchProduct(String keyword,Model model){
         PageInfo pageInfo = productService.queryAllToPage(1, 2, keyword);
@@ -52,6 +67,11 @@ public class UserController {
         return "search";
     }
 
+    /**
+     * 分页模糊查询所有产品，每页显示两个产品
+     * @param model
+     * @return
+     */
     @RequestMapping("/query2")
     public String queryAllToPage(int page,Model model,String keyword){
         PageInfo pageInfo = productService.queryAllToPage(page,2,keyword);
@@ -60,6 +80,12 @@ public class UserController {
         return "search";
     }
 
+    /**
+     * 显示购物车页面，查询出购物车内所有的商品
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping("/toBucket")
     public String toBucket(Model model,HttpSession session){
         List<Product> products = productService.queryBucket(1);
@@ -68,6 +94,11 @@ public class UserController {
         return "bucket";
     }
 
+    /**
+     * 根据商品的id加入购物车
+     * @param pId
+     * @return
+     */
     @RequestMapping("/joinBucket")
     public String joinBucket(int pId){
         Map<String,Integer> map = new HashMap<>();
@@ -77,12 +108,23 @@ public class UserController {
         return "redirect:/toBucket";
     }
 
+    /**
+     * 根据商品的id从购物车中删除
+     * @param pId
+     * @return
+     */
     @RequestMapping("/removeFromBucket")
     public String removeFromBucket(int pId){
         productService.removeFromBucket(pId);
         return "redirect:/toBucket";
     }
 
+    /**
+     * 点击商品进入商品的详细页面
+     * @param pId
+     * @param model
+     * @return
+     */
     @RequestMapping("/productDetail")
     public String productDetail(int pId,Model model){
         Product product = productService.queryProductById(pId);
@@ -90,6 +132,10 @@ public class UserController {
         return "productDetail";
     }
 
+    /**
+     *检验是否存在收货地址并且是否存在默认地址
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/toCheck")
     public String toCheck(){
@@ -107,6 +153,14 @@ public class UserController {
 
     }
 
+    /**
+     * 跳转到结算页面
+     * @param total
+     * @param request
+     * @param model
+     * @param ids
+     * @return
+     */
     @RequestMapping("/toCheckOut")
     public String toCheckOut(float total,HttpServletRequest request,Model model,Integer[] ids){
         List<Address> addresses = addressService.queryAll();
@@ -123,6 +177,12 @@ public class UserController {
         return "checkOut";
     }
 
+    /**
+     * 确认支付，跳转到支付宝页面
+     * @param session
+     * @param model
+     * @return
+     */
     @RequestMapping("/pay")
     public String pay(HttpSession session,Model model){
         List<Product> products = (List<Product>) session.getAttribute("products");
@@ -142,6 +202,11 @@ public class UserController {
         return "AlipayIndex";
     }
 
+    /**
+     * 显示所有的订单
+     * @param model
+     * @return
+     */
     @RequestMapping("/toOrder")
     public String toOrder(Model model){
         List<Order> orders = orderService.queryAll();
@@ -149,6 +214,12 @@ public class UserController {
         return "order";
     }
 
+    /**
+     * 当支付成功后，添加一个订单，同时从购物车中删除该商品
+     * @param request
+     * @return
+     * @throws ParseException
+     */
     @RequestMapping("/addOrder")
     public String addOrder(HttpServletRequest request) throws ParseException {
         float total = Float.parseFloat(request.getSession().getAttribute("total").toString());
@@ -163,7 +234,7 @@ public class UserController {
         o.setAddress(address.getAddress());
         o.setTel(address.getTel());
         o.setMoney(total);
-        o.setStatus("正在配送中...");
+        o.setStatus("正在配送中");
         o.setOrderDate(sdf.parse(sdf.format(date)));
         orderService.addOrder(o);
         List<Integer> pIds = (List<Integer>) request.getSession().getAttribute("pIds");
@@ -173,17 +244,27 @@ public class UserController {
         return "redirect:/toOrder";
     }
 
+    /**
+     * 删除订单
+     * @param oId
+     * @return
+     */
     @RequestMapping("/deleteOrder")
     public String deleteOrder(long oId){
         orderService.deleteOrder(oId);
         return "redirect:/toOrder";
     }
 
+    /**
+     * 更新订单的配送状态
+     * @param oId
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/updateOrder")
     public String updateOrder(long oId){
         Order order = orderService.queryOrderByOid(oId);
-        order.setStatus("已收货！");
+        order.setStatus("已收货");
         orderService.updateOrder(order);
         return "success";
     }

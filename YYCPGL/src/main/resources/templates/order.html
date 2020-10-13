@@ -122,7 +122,7 @@ function clearText(field)
                 <td th:text="${order.status}"></td>
                 <td th:text="${#dates.format(order.orderDate,'yyyy-MM-dd HH:mm:ss')}" id="h"></td>
                 <td>
-                    <button style="color:lightskyblue;" th:id="${order.oId}" onclick="confirm(this)">确认收货</button>
+                    <button style="color:lightskyblue;" th:id="${order.oId}" th:name="${order.status}" onclick="confirm(this)">确认收货</button>
                     <button style="color:red;" th:onclick="'javascript:a(\''+${order.oId}+'\')'">申请退款</button>
                 </td>
             </tr>
@@ -146,16 +146,21 @@ function clearText(field)
     }
 
     function confirm(obj) {
+        let status = $(obj).attr("name");
         let oId = $(obj).attr("id");
-        alert("确认收货成功");
-        $.ajax({
-            url:"updateOrder?oId="+oId,
-            success:function (data) {
-                if (data=='success'){
-                    window.location="toOrder";
+        if (status=='正在配送中') {
+            alert("确认收货成功");
+            $.ajax({
+                url: "updateOrder?oId=" + oId,
+                success: function (data) {
+                    if (data == 'success') {
+                        window.location = "toOrder";
+                    }
                 }
-            }
-        })
+            })
+        }else if(status=='已收货'){
+            $(this).attr("disabled","true");
+        }
     }
 </script>
 

@@ -1,2 +1,6 @@
 server:
-  port: 8003
+  port: 80
+
+spring:
+  redis:
+    host: 120.27.216.13

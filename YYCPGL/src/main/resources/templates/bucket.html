@@ -113,22 +113,22 @@ function clearText(field)
             let id = $(obj).attr("id");
             if (num==1){
                 alert("买得越多优惠越大哟！")
-                $('#all'+id).html(num*price);
+                $('#all'+id).html((num*price).toFixed(2));
             }else if(num==2){
                 alert("2件打9折!")
-                $('#all'+id).html(num*price*0.9);
+                $('#all'+id).html((num*price*0.9).toFixed(2));
             }else if(num==3){
                 alert("3件打8折!")
-                $('#all'+id).html(num*price*0.8);
+                $('#all'+id).html((num*price*0.8).toFixed(2));
             }else if(num==4){
                 alert("4件打7折!")
-                $('#all'+id).html(num*price*0.7);
+                $('#all'+id).html((num*price*0.7).toFixed(2));
             }else if(num==5){
                 alert("5件打6折!")
-                $('#all'+id).html(num*price*0.6);
+                $('#all'+id).html((num*price*0.6).toFixed(2));
             }else if(num>5){
                 alert("5件以上打5折!")
-                $('#all'+id).html(num*price*0.5);
+                $('#all'+id).html((num*price*0.5).toFixed(2));
             }else {
                 alert("请确定您输入了正确的数字！")
             }
@@ -139,7 +139,7 @@ function clearText(field)
             let number = parseInt(jQuery);
             money+=number;
         })
-
+        money=money.toFixed(2);
         $("#all").html(money)
     }
 

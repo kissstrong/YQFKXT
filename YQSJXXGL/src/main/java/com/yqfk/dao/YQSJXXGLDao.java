@@ -1,6 +1,6 @@
 package com.yqfk.dao;
 
-import com.yqfk.poji.DataForPerson;
+import com.yqfk.pojo.DataForPerson;
 import com.yqfk.vo.Tags;
 import org.apache.ibatis.annotations.Mapper;
 

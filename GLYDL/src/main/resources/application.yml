@@ -11,6 +11,8 @@ spring:
   jpa:
     database: MySql
     show-sql: true
+    hibernate:
+      ddl-auto: update
   redis:
     host: 120.27.216.13
 aliyun:

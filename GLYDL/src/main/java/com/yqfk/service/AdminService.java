@@ -1,21 +1,13 @@
 package com.yqfk.service;
 
-import com.yqfk.dao.AdminDao;
 import com.yqfk.pojo.Admin;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-
-@Service
-@Transactional
-public class AdminService {
-
-    @Autowired
-    private AdminDao adminDao;
-
-    public Admin getAdmin(Admin admin){
-        return admin;
-    }
+/**
+ * @author cyz
+ * @date 2020-10-12 11:37
+ */
+public interface AdminService {
+    public boolean checkLogin(String Username,String password);
+    Admin queryAdminByPhone(String phone);
+    void save(Admin admin);
 }

@@ -17,22 +17,11 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-   /* @RequestMapping("/address1")
-    public String address(Model model){
-        List<Address> addresses = addressService.queryAll();
-        if(addresses.size()==0) {
-            model.addAttribute("addresses",addresses);
-            return "address";
-        }else {
-            Address address = addresses.get(0);
-            address.setDef(1);
-            addressService.updateAddress(address);
-            List<Address> addresses1 = addressService.queryAll();
-            model.addAttribute("addresses",addresses1);
-            return "address";
-        }
-    }*/
-
+    /**
+     * 查询所有的收货地址
+     * @param model
+     * @return
+     */
     @RequestMapping("/address2")
     public String address2(Model model){
         List<Address> addresses = addressService.queryAll();
@@ -40,11 +29,23 @@ public class AddressController {
         return "address";
     }
 
+    /**
+     * 跳转到增加收货地址的页面
+     * @return
+     */
     @RequestMapping("/toAddAddress")
     public String toAddAddress(){
         return "addAddress";
     }
 
+    /**
+     * 增加一个新的收货地址
+     * @param name
+     * @param address
+     * @param tel
+     * @param detail
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/addAddress")
     public String addAddress(String name,String address,String tel,String detail){
@@ -62,6 +63,13 @@ public class AddressController {
         return "success";
     }
 
+    /**
+     * 跳转到更新收货地址的页面
+     * @param aId
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping("/toUpdateAddress")
     public String toUpdateAddress(int aId,HttpServletRequest request,Model model){
         Address address = addressService.getAddressByAid(aId);
@@ -71,6 +79,15 @@ public class AddressController {
         return "updateAddress";
     }
 
+    /**
+     * 更新收货地址
+     * @param name
+     * @param address
+     * @param tel
+     * @param detail
+     * @param request
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/updateAddress")
     public String updateAddress(String name, String address, String tel, String detail, HttpServletRequest request){
@@ -86,12 +103,22 @@ public class AddressController {
         return "success";
     }
 
+    /**
+     * 删除一个收货地址
+     * @param aId
+     * @return
+     */
     @RequestMapping("/deleteAddress")
     public String deleteAddress(int aId){
         addressService.deleteAddress(aId);
         return "redirect:/address2";
     }
 
+    /**
+     * 给收货地址设置是否为默认地址
+     * @param aId
+     * @return
+     */
     @RequestMapping("/setDefault")
     public String setDefault(int aId){
         List<Address> addresses = addressService.queryAll();

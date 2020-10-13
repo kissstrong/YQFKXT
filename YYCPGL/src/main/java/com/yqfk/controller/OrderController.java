@@ -20,6 +20,13 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 支付宝主页面表单所填写的数据提交到这个请求
+     * @param alipayBean
+     * @param request
+     * @return
+     * @throws AlipayApiException
+     */
     @RequestMapping("/alipay1")
     @ResponseBody
     public String alipay(AlipayBean alipayBean, HttpServletRequest request) throws AlipayApiException {

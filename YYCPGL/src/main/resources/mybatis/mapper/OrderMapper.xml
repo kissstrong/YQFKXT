@@ -14,7 +14,7 @@
     </select>
     
     <insert id="addOrder" parameterType="order">
-        insert into orderdetail (uId,oId,uName,address,tel,money,status,orderDate) values (1,#{oId},#{uName},#{address},#{tel},#{money},'正在配送中...',#{orderDate});
+        insert into orderdetail (uId,oId,uName,address,tel,money,status,orderDate) values (1,#{oId},#{uName},#{address},#{tel},#{money},'正在配送中',#{orderDate});
     </insert>
 
     <delete id="deleteOrder" parameterType="long">
@@ -22,6 +22,6 @@
     </delete>
 
     <update id="updateOrder" parameterType="order">
-        update orderdetail set status='已收货！' where oId=${oId}
+        update orderdetail set status='已收货' where oId=${oId}
     </update>
 </mapper>

@@ -1,49 +1,25 @@
 package com.yqfk.service;
 
-import com.aliyuncs.exceptions.ClientException;
-import com.yqfk.dao.UserDao;
 import com.yqfk.pojo.User;
-import com.yqfk.util.SmsUtil;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-@Service
-@Transactional
-public class UserService {
+/**
+ * @author cyz
+ * @date 2020-10-12 11:37
+ */
+public interface UserService {
+     List<User> findAll();
 
-    @Autowired
-    private UserDao userDao;
+     User queryById(int id);
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-    @Autowired
-    private SmsUtil smsUtil;
+     void update(User user);
 
-    @Value("${aliyun.sms.template_code}")
-    private String template_code;
+     void deleteById(int id);
 
-    @Value("${aliyun.sms.sign_name}")
-    private String sign_name;
+     void save(User user);
+     User queryUserByPhone(String phone);
+     boolean checkUser(String name,String password);
 
-    public List<User> findAll(){
-        return userDao.findAll();
-    }
-
-    public void sendMsg(String mobile) {
-        //生成随机六位数（lang3）
-        String checkcode = RandomStringUtils.randomNumeric(6);
-        //往缓存里面存一份
-        redisTemplate.opsForValue().set("checkcode_"+mobile, checkcode, 60, TimeUnit.SECONDS);
-        try {
-            smsUtil.sendSms(mobile, template_code, sign_name, "{\"code\":\""+ checkcode +"\"}");
-        } catch (ClientException e) {
-            e.printStackTrace();
-        }
-    }
+     void sendMsg(String mobile);
 }

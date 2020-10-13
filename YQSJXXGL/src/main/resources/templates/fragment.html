@@ -3,7 +3,7 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
-    <title>Dashboard &mdash; Stisla</title>
+    <title>疫情防控系统</title>
     <link th:rel="stylesheet" th:href="@{dist/modules/bootstrap/css/bootstrap.min.css}">
     <link th:rel="stylesheet" th:href="@{dist/modules/ionicons/css/ionicons.min.css}">
     <link th:rel="stylesheet" th:href="@{dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css}">
@@ -24,7 +24,7 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
                 <i class="ion ion-android-person d-lg-none"></i>
-                <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                <div class="d-sm-none d-lg-inline-block" >Hi, [[${session.user.username}]]</div>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right">
@@ -45,7 +45,7 @@
                 <img alt="image" src="../dist/img/avatar/avatar-1.jpeg">
             </div>
             <div class="sidebar-user-details">
-                <div class="user-name">Ujang Maman</div>
+                <div class="user-name">[[${session.user.username}]]</div>
                 <div class="user-role">
                     普通用户
                 </div>
@@ -57,6 +57,9 @@
             </li>
             <li th:class="${page}=='2'?'active':''">
                 <a href="table" th:href="@{touploaddata}"><i class="ion ion-heart"></i><span>疫情数据上报</span></a>
+            </li>
+            <li th:class="${page}=='3'?'active':''">
+                <a href="table" th:href="@{toYYCPGL}"><i class="ion ion-heart"></i><span>医药厂品管理系统</span></a>
             </li>
         </ul>
     </aside>
