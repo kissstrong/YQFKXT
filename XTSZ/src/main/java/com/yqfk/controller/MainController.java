@@ -81,7 +81,6 @@ public class MainController {
             Boolean check = restTemplate.getForObject(GLYDL_URL + "/checkAdminLogin?name=" + name + "&password=" + password, boolean.class);
             if (check){
                 Admin admin = (Admin) redisTemplate.opsForHash().values("admin").get(0);
-                System.out.println(admin);
                 session.setAttribute("admin",admin);
                 return "redirect:/admin/index";
             }
@@ -109,11 +108,11 @@ public class MainController {
         List<User> user = redisTemplate.opsForHash().values("user");
         if (admin.size()>0){
             session.removeAttribute("admin");
-            System.out.println(redisTemplate.opsForHash().delete("admin", "admin"));
+            redisTemplate.opsForHash().delete("admin", "admin");
         }
         if (user.size()>0){
             session.removeAttribute("user");
-            System.out.println(redisTemplate.opsForHash().delete("user", "user"));
+            redisTemplate.opsForHash().delete("user", "user");
         }
         return "index";
     }
