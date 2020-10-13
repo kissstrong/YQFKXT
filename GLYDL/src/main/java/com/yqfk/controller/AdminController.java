@@ -128,7 +128,9 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping("/logout")
-    public void logout(HttpServletResponse response)throws Exception{
+    public void logout(HttpServletResponse response,HttpSession session)throws Exception{
+        session.removeAttribute("admin");
+        System.out.println("lllllllllllllllll");
         response.sendRedirect(XTSZ_URL+"/logout");
     }
 

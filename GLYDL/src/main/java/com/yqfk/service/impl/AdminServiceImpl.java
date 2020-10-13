@@ -16,7 +16,7 @@ public class AdminServiceImpl implements AdminService {
     public boolean checkLogin(String Username,String password){
         Admin admin = adminDao.queryAdminByUsernameAndPassword(Username, password);
         if (admin!=null){
-            redisTemplate.opsForHash().put("admin",admin.getUserid(),admin);
+            redisTemplate.opsForHash().put("admin","admin",admin);
             return true;
         }
         return false;

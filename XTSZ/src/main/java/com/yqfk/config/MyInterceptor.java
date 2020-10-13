@@ -14,20 +14,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 public class MyInterceptor implements WebMvcConfigurer {
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInter()).addPathPatterns("/**")
                 .excludePathPatterns("/css/**","/js/**")
                 .excludePathPatterns("/","/toregister","/toreset","/register")
                 .excludePathPatterns("/checkLogin","/send","/checkIsSend","/checkcode")
-                .excludePathPatterns("/Resetpassworrd","/checkPhoneIsRepeat");
+                .excludePathPatterns("/Resetpassword","/checkPhoneIsRepeat","/logout");
     }
 }
 class MyInter extends HandlerInterceptorAdapter{
-    @Autowired
-    private RedisTemplate redisTemplate;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         if (request.getSession().getAttribute("admin")!=null||request.getSession().getAttribute("user")!=null){
             return true;
         }

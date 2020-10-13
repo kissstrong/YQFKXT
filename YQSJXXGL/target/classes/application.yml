@@ -1,0 +1,13 @@
+server:
+  port: 8005
+
+spring:
+  datasource:
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    url: jdbc:mysql://120.27.216.13:3306/yqfk?serverTimezone=UTC&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  redis:
+    host: 120.27.216.13
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

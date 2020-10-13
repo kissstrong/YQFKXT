@@ -60,12 +60,11 @@ public class UserServiceImpl implements UserService {
     public boolean checkUser(String name, String password) {
         User user = userDao.queryUserByUsernameAndPassword(name, password);
         if (user!=null){
-            redisTemplate.opsForHash().put("user",user.getUserid(),user);
+            redisTemplate.opsForHash().put("user","user",user);
             return true;
         }
         return false;
     }
-
     public void sendMsg(String mobile) {
         //生成随机六位数（lang3）
         String checkcode = RandomStringUtils.randomNumeric(6);

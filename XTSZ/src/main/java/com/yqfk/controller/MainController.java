@@ -81,6 +81,7 @@ public class MainController {
             Boolean check = restTemplate.getForObject(GLYDL_URL + "/checkAdminLogin?name=" + name + "&password=" + password, boolean.class);
             if (check){
                 Admin admin = (Admin) redisTemplate.opsForHash().values("admin").get(0);
+                System.out.println(admin);
                 session.setAttribute("admin",admin);
                 return "redirect:/admin/index";
             }
@@ -108,11 +109,11 @@ public class MainController {
         List<User> user = redisTemplate.opsForHash().values("user");
         if (admin.size()>0){
             session.removeAttribute("admin");
-            redisTemplate.opsForHash().delete("admin",admin.get(0).getUserid(),admin);
+            System.out.println(redisTemplate.opsForHash().delete("admin", "admin"));
         }
         if (user.size()>0){
             session.removeAttribute("user");
-            redisTemplate.opsForHash().delete("user",user.get(0).getUserid(),user);
+            System.out.println(redisTemplate.opsForHash().delete("user", "user"));
         }
         return "index";
     }
@@ -154,7 +155,7 @@ public class MainController {
     @RequestMapping("/checkcode")
     public String checkcode(String mobile,String code){
         String code1 = (String) redisTemplate.opsForValue().get("checkcode_"+mobile);
-        System.out.println(code1);
+        System.out.println("验证码:"+code1);
         if (code.equals(code1)){
             return "success";
         }
@@ -169,10 +170,13 @@ public class MainController {
      * @return
      */
     @ResponseBody
-    @PostMapping("/Resetpassworrd")
+    @PostMapping("/Resetpassword")
     public String resetpassworrd(String password,String phone,String role){
         String result = restTemplate.getForObject(GLYDL_URL + "/ResetPassword?password=" + password + "&phone=" + phone + "&role=" + role, String.class);
-            return "index";
+        if (result.equals("false")){
+            return "false";
+        }
+        return "index";
     }
 
     /**
