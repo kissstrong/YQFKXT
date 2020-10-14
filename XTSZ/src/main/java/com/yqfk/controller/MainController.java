@@ -36,6 +36,24 @@ public class MainController {
     public String index(){
         return "index";
     }
+    /**
+     * 跳转到登录页面
+     * @return
+     */
+    @RequestMapping("/BackToLogin")
+    public String BackToLogin(HttpSession session){
+        List<Admin> admin =  redisTemplate.opsForHash().values("admin");
+        List<User> user = redisTemplate.opsForHash().values("user");
+        if (admin.size()>0){
+            session.removeAttribute("admin");
+            redisTemplate.opsForHash().delete("admin", "admin");
+        }
+        if (user.size()>0){
+            session.removeAttribute("user");
+            redisTemplate.opsForHash().delete("user", "user");
+        }
+        return "index";
+    }
 
     /**
      * 去注册页面

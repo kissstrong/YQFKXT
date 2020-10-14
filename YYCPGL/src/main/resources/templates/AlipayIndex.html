@@ -15,6 +15,7 @@
         <div class="col-md-6">
             <H3 class="text-center">收银台</H3>
             <form th:action="@{/alipay1}" >
+                <input hidden name="role" value="user">
                 <div class="form-group">
                     <label for="exampleInputEmail1"  class="text-center">*订单名称*</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" name="subject" th:value="${str}" style="text-align: center">

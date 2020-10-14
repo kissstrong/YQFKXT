@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--顶部-->
+<div id="templatemo_header" th:fragment="topbar">
+    <div id="site_title">
+        <h1><a rel="nofollow" th:href="@{/admin/index}">Pharmaceutical Product Management</a></h1>
+    </div>
+
+    <div id="header_right">
+        <div class="cleaner"></div>
+        <div id="templatemo_search">
+            <form action="admin/searchProduct" method="get">
+                <input type="text"  name="keyword" placeholder="搜索" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+                <input type="submit" name="Search" value="" alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--菜单-->
+<div id="templatemo_menu" class="ddsmoothmenu" th:fragment="menubar">
+    <ul>
+        <li><a th:href="@{/admin/index}">首页</a></li>
+        <li><a th:href="@{/admin/products}">产品</a></li>
+        <li><a th:href="@{/admin/toBucket}">购物车</a></li>
+        <li><a th:href="@{/admin/toOrder}">订单</a></li>
+        <li><a th:href="@{/admin/address2}">收货地址</a></li>
+        <li><a th:href="@{/admin/returnToIndex}">返回主界面</a></li>
+    </ul>
+    <br style="clear: left" />
+</div>
+
+<!--侧边栏-->
+<div id="sidebar" th:fragment="sidebar">
+    <h3>新闻</h3>
+    <ul class="sidebar_menu">
+        <li><a th:href="@{https://voice.baidu.com/act/newpneumonia/newpneumonia/?from=osari_pc_3#tab0}">疫情实时大数据报告</a></li>
+        <li><a th:href="@{https://baike.baidu.com/item/2019%E6%96%B0%E5%9E%8B%E5%86%A0%E7%8A%B6%E7%97%85%E6%AF%92/24267858?fr=aladdin}">什么是新型冠状病毒肺炎？</a></li>
+        <li><a th:href="@{http://m.dezhoudaily.com/p/1490452.html?miref=migs_newhome_result}">如何有效地预防新冠肺炎</a></li>
+        <li><a th:href="@{https://baijiahao.baidu.com/s?id=1659465579094630859&wfr=spider&for=pc}">中国对疫情采取的措施</a></li>
+        <li><a th:href="@{https://jingyan.baidu.com/article/c35dbcb0253408c817fcbc02.html}">洗手的正确步骤</a></li>
+        <li><a th:href="@{https://new.qq.com/rain/a/20201002A0ANM500}">特朗普确诊新冠肺炎</a></li>
+        <li><a th:href="@{https://baijiahao.baidu.com/s?id=1679944694404203590&wfr=spider&for=pc}">警惕！疫情下的跨国金融纠纷</a></li>
+        <li><a th:href="@{http://www.ahjd.gov.cn/OpennessContent/show/1953159.html}">关于印发《庙首镇新冠疫情常态化防控工作》的通知</a></li>
+        <li><a th:href="@{http://news.cctv.com/2020/10/08/VIDEAanvGjHHHLZqvEYAuCCb201008.shtml}">吉林省新闻联播：防疫资讯</a></li>
+        <li><a th:href="@{https://dy.163.com/article/FOE8TU2P0529AQIE.html}">弹劾巴托梅乌的会议将会推迟举行</a></li>
+        <li><a th:href="@{http://news.hexun.com/2020-10-08/202191307.html}">新冠疫情导致1.5亿人陷入极端贫困</a></li>
+        <li><a th:href="@{http://www.dzwww.com/xinwen/jishixinwen/202010/t20201008_19847168.htm}">新冠疫情特别会议</a></li>
+    </ul>
+</div>
+
+<!--footer -->
+<div id="templatemo_footer" th:fragment="footerbar">
+
+    <div>
+        <p style="font-weight: bold;font-style: oblique;width: 400px;"><a th:href="@{/index}" style="color:orange;">医药产品管理 — 管理您的身心健康！</a></p>
+        <br>
+        <p><span style="font-weight: bold">友情链接：</span>
+            <span><a th:href="@{https://www.ycit.cn/}">盐城工学院&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{http://www.itshixun.com/index}">青软实训&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{http://www.baidu.com}">百度&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{https://www.taobao.com/}">淘宝&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{https://www.jd.com/}">京东&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{https://www.bilibili.com/}">哔哩哔哩&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{https://www.iqiyi.com/}">爱奇艺视频&nbsp;&nbsp;</a></span>
+            <span><a th:href="@{https://v.qq.com/}">腾讯视频</a></span>
+        </p>
+
+    </div>
+
+
+
+    <div class="cleaner h40"></div>
+    <center>
+        版权所有 &copy; 2020 QST-Java项目组 保留所有权利
+    </center>
+</div>
+</html>

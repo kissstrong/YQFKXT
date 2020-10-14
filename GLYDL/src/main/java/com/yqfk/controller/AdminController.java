@@ -64,7 +64,7 @@ public class AdminController {
      */
     @RequestMapping("/toYYCPGL")
     public void toYYCPGL(HttpServletResponse response)throws Exception{
-         response.sendRedirect(YYCPGL_URL);
+         response.sendRedirect(YYCPGL_URL+"/admin");
     }
 
     /**
@@ -130,7 +130,6 @@ public class AdminController {
     @RequestMapping("/logout")
     public void logout(HttpServletResponse response,HttpSession session)throws Exception{
         session.removeAttribute("admin");
-        System.out.println("lllllllllllllllll");
         response.sendRedirect(XTSZ_URL+"/logout");
     }
 
@@ -188,6 +187,16 @@ public class AdminController {
             return "success";
         }
        return "false";
+    }
+
+    /**
+     * 错误页面返回登录页面
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/BackToLogin")
+    public void BackToLogin(HttpServletResponse response)throws Exception{
+        response.sendRedirect(XTSZ_URL);
     }
 
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Checkout</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link th:href="@{/css/templatemo_style.css}" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/ddsmoothmenu.css}" />
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/ddsmoothmenu.js}">
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+	mainmenuid: "templatemo_menu", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+
+</head>
+
+<body id="subpage">
+
+<div id="templatemo_wrapper">
+
+    <div th:replace="~{admin/common::topbar}"></div>
+    <div th:replace="~{admin/common::menubar}"></div>
+
+    <div class="cleaner h20"></div>
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main">
+
+        <div th:replace="~{admin/common::sidebar}"></div>
+       
+        <div id="content">
+       		<h2 style="font-weight: bold">结算</h2>
+            <h5><strong>请确认相关信息</strong></h5>
+            <div class="col col_13 checkout">
+				姓名:
+                <input type="text"  style="width:300px;" th:value="${address.getaName()}" />
+                地址:
+                <input type="text"  style="width:300px;"  th:value="${address.getAddress()}"/>
+                电话:
+                <input type="text"  style="width:300px;"  th:value="${address.getTel()}"/>
+            </div>
+
+            <div class="cleaner h50"></div>
+            <h4>需支付: <strong>￥ [[${total}]]</strong></h4>
+			<!--<p><input type="checkbox" />I have accepted the <a href="#">Terms of Use</a>.</p>-->
+            <table style="border:1px solid #CCCCCC;" width="100%">
+                <tr>
+                    <td height="80px"> <img th:src="@{/images/zf/zfb.jpg}" style="height: 100px;width: 100px;" /></td>
+                    <td width="400px;" style="padding: 0px 20px;">推荐使用支付宝支付！支持花呗付款！
+                    </td>
+                    <td><a th:href="@{/admin/pay}" class="more">确认支付</a></td>
+                </tr>
+            </table>
+               
+		</div>
+        <div class="cleaner"></div>
+    </div> <!-- END of main -->
+
+    <div th:replace="~{admin/common::footerbar}"></div>
+   
+</div>
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

@@ -44,7 +44,7 @@ public class MainAdminController {
      */
     @RequestMapping("/admin/yycpgl")
     public void ToYYCPGL(HttpServletResponse response)throws Exception{
-        response.sendRedirect(YYCPGL_URL);
+        response.sendRedirect(YYCPGL_URL+"/admin");
     }
 
 }

@@ -186,6 +186,6 @@ public class AdminYQSJXXGLController {
      */
     @RequestMapping("/toMainYYCPGL")
     public void toYYCPGL(HttpServletResponse response)throws Exception{
-        response.sendRedirect(YYCPGL_URL);
+        response.sendRedirect(YYCPGL_URL+"/admin");
     }
 }

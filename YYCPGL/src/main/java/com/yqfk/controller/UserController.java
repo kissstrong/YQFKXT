@@ -9,12 +9,14 @@ import com.yqfk.service.ProductService;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,13 +24,26 @@ import java.util.*;
 
 @Controller
 public class UserController {
-
+    private final String YQSJXXGL_URL="http://localhost:8005";
+    private final String XTSZ_URL="http://localhost:80";
     @Autowired
     private ProductService productService;
     @Autowired
     private AddressService addressService;
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private RedisTemplate redisTemplate;
+    /**
+     * 跳转到主界面
+     * @return
+     */
+    @RequestMapping({"/","/index"})
+    public String index(HttpSession session){
+        List user = redisTemplate.opsForHash().values("user");
+        session.setAttribute("user",user.get(0));
+        return "index";
+    }
 
     /**
      * 分页查询所有产品，每页显示六个产品
@@ -269,5 +284,25 @@ public class UserController {
         return "success";
     }
 
+    /**
+     * 返回主页面
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/returnToIndex")
+    public void returnToIndex(HttpServletResponse response)throws Exception{
+        response.sendRedirect(YQSJXXGL_URL+"/user/return");
+    }
 
+    /**
+     * 错误页面返回登录页面
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping("/BackToLogin")
+    public void BackToLogin(HttpServletResponse response,HttpSession session)throws Exception{
+        session.removeAttribute("user");
+        session.removeAttribute("admin");
+        response.sendRedirect(XTSZ_URL+"/BackToLogin");
+    }
 }

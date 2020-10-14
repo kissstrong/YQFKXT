@@ -54,6 +54,13 @@ function clearText(field)
 	});
 </script>
 
+
+<style type="text/css">
+    .oc:hover{
+        cursor: pointer;
+    }
+
+</style>
 </head>
 
 <body id="subpage">
@@ -118,11 +125,11 @@ function clearText(field)
         <div class="cleaner"></div>
         <div class="col-md-offset-1 col-md-10">
             <h4 align="center">
-                <a onclick="up()" class="up">上一页</a>
-                <a th:onclick="'javascript:query1('+${pageInfo.pageNum}+')'">[[${pageInfo.pageNum}]]</a>
-                <a th:onclick="'javascript:query1('+${pageInfo.pageNum+1}+')'">[[${pageInfo.pageNum+1}]]</a>
-                <a th:onclick="'javascript:query1('+${pageInfo.pageNum+2}+')'">[[${pageInfo.pageNum+2}]]</a>
-                <a onclick="down()" class="down">下一页</a>
+                <a onclick="up()" class="up oc">上一页</a>
+                <a th:onclick="'javascript:query1('+${pageInfo.pageNum}+')'" class="oc">[[${pageInfo.pageNum}]]</a>
+                <a th:onclick="'javascript:query1('+${pageInfo.pageNum+1}+')'" class="oc">[[${pageInfo.pageNum+1}]]</a>
+                <a th:onclick="'javascript:query1('+${pageInfo.pageNum+2}+')'" class="oc">[[${pageInfo.pageNum+2}]]</a>
+                <a onclick="down()" class="down oc" >下一页</a>
             </h4>
         </div>
     </div> <!-- END of main -->
@@ -136,7 +143,6 @@ function clearText(field)
 <script th:src="@{/js/jquery-3.1.0.js}" type="text/javascript"></script>
 <script>
     function up() {
-        //[[${pageInfo.pageNum-1<=0}]]
         var a=$('#a').val();
         var b=a-1;
         if(b<=0){
@@ -147,7 +153,7 @@ function clearText(field)
     }
 
     function down() {
-        //[[${pageInfo.pageNum+1>pageInfo.pages}]]
+
         var a=$('#a').val();
         var b=parseInt(a)+1;
         var e=$('#e').val();
@@ -159,13 +165,14 @@ function clearText(field)
     }
 
     function query1(page) {
-        var e=$('#e').val();
-        if(page<=e){
-            window.location="query1?page="+page
-        }else {
-            $(this).attr("disabled","true");
+        var e = $('#e').val();
+        if (page <= e) {
+            window.location = "query1?page=" + page
+        } else {
+            $(this).attr("disabled", "true");
         }
     }
+
 </script>
 
 </body>

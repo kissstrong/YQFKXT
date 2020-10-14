@@ -21,7 +21,7 @@ public class Alipay {
      * @throws AlipayApiException
      */
 
-    public String pay(AlipayBean alipayBean) throws AlipayApiException {
+    public String pay(AlipayBean alipayBean,String role) throws AlipayApiException {
         // 1、获得初始化的AlipayClient
 
         String serverUrl = "https://openapi.alipaydev.com/gateway.do";
@@ -33,13 +33,17 @@ public class Alipay {
         String signType = "RSA2";
         //支付成功发下面的请求
         String returnUrl = "http://localhost:8006/addOrder";
-
+        String AdminreturnUrl = "http://localhost:8006/admin/addOrder";
         String notifyUrl = "http://localhost:8006/404.html";
         AlipayClient alipayClient = new DefaultAlipayClient(serverUrl, appId, privateKey, format, charset, alipayPublicKey, signType);
         // 2、设置请求参数
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
         // 页面跳转同步通知页面路径
-        alipayRequest.setReturnUrl(returnUrl);
+        if (role.equals("admin")){
+            alipayRequest.setReturnUrl(AdminreturnUrl);
+        }else {
+            alipayRequest.setReturnUrl(returnUrl);
+        }
         // 服务器异步通知页面路径
         alipayRequest.setNotifyUrl(notifyUrl);
         //账户订单号

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HOME</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link th:href="@{/css/templatemo_style.css}" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/ddsmoothmenu.css}" />
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/ddsmoothmenu.js}">
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+	mainmenuid: "templatemo_menu", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+</script>
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+<script language="javascript" type="text/javascript" th:src="@{/scripts/mootools-1.2.1-core.js}"></script>
+<script language="javascript" type="text/javascript" th:src="@{/scripts/mootools-1.2-more.js}"></script>
+<script language="javascript" type="text/javascript" th:src="@{/scripts/slideitmoo-1.1.js}"></script>
+<script language="javascript" type="text/javascript">
+	window.addEvents({
+		'domready': function(){
+			/* thumbnails example , div containers */
+			new SlideItMoo({
+						overallContainer: 'SlideItMoo_outer',
+						elementScrolled: 'SlideItMoo_inner',
+						thumbsContainer: 'SlideItMoo_items',		
+						itemsVisible: 5,
+						elemsSlide: 2,
+						duration: 200,
+						itemsSelector: '.SlideItMoo_element',
+						itemWidth: 171,
+						showControls:1});
+		},
+		
+	});
+
+	function clearText(field)
+	{
+		if (field.defaultValue == field.value) field.value = '';
+		else if (field.value == '') field.value = field.defaultValue;
+	}
+</script>
+
+</head>
+
+<body id="home">
+
+<div id="templatemo_wrapper">
+    <div th:replace="~{admin/common::topbar}"></div>
+    <div th:replace="~{admin/common::menubar}"></div>
+    <div id="templatemo_middle">
+    	<img th:src="@{/images/templatemo_image_01.png}" style="height: 225px; width: 400px;"/>
+    	<h1>医药产品管理</h1>
+        <p>我们承诺：专注于疫情防控，提供尽可能多的医药产品，为您和您的家人带来带来安心、带来健康！</p>
+        <a th:href="@{/admin/products}" class="buy_now">浏览所有商品</a>
+    </div> <!-- END of middle -->
+    
+    <div id="templatemo_main_top"></div>
+    <div id="templatemo_main">
+    	<div id="product_slider">
+    		<div id="SlideItMoo_outer">	
+                <div id="SlideItMoo_inner">			
+                    <div id="SlideItMoo_items">
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=1)}" target="_parent">
+                                <img th:src="@{/images/gallery/01.jpg}" alt="product 1" style="height: 150px;width: 150px"/></a>
+                        </div>	
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=2)}" target="_parent">
+                                <img th:src="@{/images/gallery/02.jpg}" alt="product 2" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=3)}" target="_parent">
+                                 <img th:src="@{/images/gallery/03.jpg}" alt="product 3" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=4)}" target="_parent">
+                                <img th:src="@{/images/gallery/04.jpg}" alt="product 4" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=5)}" target="_parent">
+                               <img th:src="@{/images/gallery/05.jpg}" alt="product 5" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=9)}" target="_parent">
+                                <img th:src="@{/images/gallery/06.jpg}" alt="product 6" style="height: 150px;width: 150px"/></a>
+                        </div>
+                        <div class="SlideItMoo_element">
+                                <a th:href="@{/admin/productDetail(pId=7)}" target="_parent">
+                                <img th:src="@{/images/gallery/07.jpg}" alt="product 7" style="height: 150px;width: 150px"/></a>
+                        </div>
+                    </div>			
+                </div>
+            </div>
+            <div class="cleaner"></div>
+        </div>
+        
+        <div th:replace="~{admin/common::sidebar}"></div>
+        
+        <div id="content">
+        	<div class="col col_14 product_gallery">
+            	<a th:href="@{/admin/productDetail(pId=1)}"><img th:src="@{/images/product/1/collect.jpg}" alt="Product 01" style="height: 150px;width: 150px"/></a>
+                <h3>阿莫西林胶囊</h3>
+                <p class="product_price">￥ 25</p>
+                <a th:href="@{/admin/joinBucket(pId=1)}" class="add_to_cart">Add to Cart</a>
+            </div>        	
+            <div class="col col_14 product_gallery">
+            	<a th:href="@{/admin/productDetail(pId=10)}"><img th:src="@{/images/product/2/collect.jpg}" alt="Product 02" style="height: 150px;width: 150px"/></a>
+                <h3>N95口罩</h3>
+                <p class="product_price">￥ 28.9</p>
+                <a th:href="@{/admin/joinBucket(pId=10)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery no_margin_right">
+            	<a th:href="@{/admin/productDetail(pId=4)}"><img th:src="@{/images/product/3/collect.jpg}" alt="Product 03" style="height: 150px;width: 150px"/></a>
+                <h3>一次性医用口罩</h3>
+                <p class="product_price">￥ 20</p>
+                <a th:href="@{/admin/joinBucket(pId=4)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery">
+            	<a th:href="@{/admin/productDetail(pId=5)}"><img th:src="@{/images/product/4/collect.jpg}" alt="Product 04" style="height: 150px;width: 150px"/></a>
+                <h3>小儿肺热咳喘颗粒</h3>
+                <p class="product_price">￥ 32</p>
+                <a th:href="@{/admin/joinBucket(pId=5)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery">
+            	<a th:href="@{/admin/productDetail(pId=9)}"><img th:src="@{/images/product/5/collect.jpg}" alt="Product 05" style="height: 150px;width: 150px"/></a>
+                <h3>头孢克圬胶囊</h3>
+                <p class="product_price">￥ 40</p>
+                <a th:href="@{/admin/joinBucket(pId=9)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery no_margin_right">
+            	<a th:href="@{/admin/productDetail(pId=12)}"><img th:src="@{/images/product/6/collect.jpg}" alt="Product 06" style="height: 150px;width: 150px"/></a>
+                <h3>医用酒精</h3>
+                <p class="product_price">￥ 36</p>
+                <a th:href="@{/admin/joinBucket(pId=12)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery">
+            	<a th:href="@{/admin/productDetail(pId=13)}"><img th:src="@{/images/product/7/collect.jpg}" alt="Product 07" style="height: 150px;width: 150px"/></a>
+                <h3>测温枪</h3>
+                <p class="product_price">￥ 139</p>
+                <a th:href="@{/admin/joinBucket(pId=13)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery">
+            	<a th:href="@{/admin/productDetail(pId=15)}"><img th:src="@{/images/product/8/collect.jpg}" alt="Product 08" style="height: 150px;width: 150px"/></a>
+                <h3>一次性手套(盒装)</h3>
+                <p class="product_price">￥ 9.9</p>
+                <a th:href="@{/admin/joinBucket(pId=15)}" class="add_to_cart">Add to Cart</a>
+            </div>
+            <div class="col col_14 product_gallery no_margin_right">
+            	<a th:href="@{/admin/productDetail(pId=2)}"><img th:src="@{/images/product/9/collect.jpg}" alt="Product 09" style="height: 150px;width: 150px"/></a>
+                <h3>药物收纳盒</h3>
+                <p class="product_price">￥ 29.9</p>
+                <a th:href="@{/admin/joinBucket(pId=2)}" class="add_to_cart">Add to Cart</a>
+            </div>
+        </div> <!-- END of content -->
+        <div class="cleaner"></div>
+    </div> <!-- END of main -->
+
+    <div th:replace="~{admin/common::footerbar}"></div>
+   
+</div>
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

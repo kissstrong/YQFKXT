@@ -23,14 +23,26 @@ public class OrderController {
     /**
      * 支付宝主页面表单所填写的数据提交到这个请求
      * @param alipayBean
-     * @param request
+     * @param
+     * @return
+     * @throws AlipayApiException
+     */
+    @RequestMapping("/admin/alipay1")
+    @ResponseBody
+    public String alipay(AlipayBean alipayBean, String role ) throws AlipayApiException {
+        return alipay.pay(alipayBean,role);
+    }
+    /**
+     * 支付宝主页面表单所填写的数据提交到这个请求
+     * @param alipayBean
+     * @param
      * @return
      * @throws AlipayApiException
      */
     @RequestMapping("/alipay1")
     @ResponseBody
-    public String alipay(AlipayBean alipayBean, HttpServletRequest request) throws AlipayApiException {
-        return alipay.pay(alipayBean);
+    public String alipay1(AlipayBean alipayBean, String role) throws AlipayApiException {
+        return alipay.pay(alipayBean,role);
     }
 
 }
